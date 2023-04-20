@@ -41,3 +41,27 @@ class Solution {
         return dp[amount];
     }
 }
+
+
+// python
+
+def coinsChange(coins, amount):
+	minimalChange = minimalChange(coins, amount, 0)
+	if minimalChange != float('inf'):
+  	return minimalChange
+  return -1
+  
+def minimalChangeValue(coins, amount, coinsUsed):
+	if amount < 0:
+  	return float('inf')
+  if amount == 0:
+  	return coinsUsed
+	minimalChange = float('inf')
+  for coin in coins:
+  	restToCalculate = amount - coin
+  	if restToCalculate in memo: 
+    	return memo[restToCalculate]
+    currMinimalChange = minimalChangeValue(coins, restToCalculate, coinsUsed + 1) 
+  	minimalChange = min(minimalChange, currMinimalChange)
+  memo[amount] = minimalChange
+  return minimalChange 
